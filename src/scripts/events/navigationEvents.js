@@ -1,4 +1,6 @@
+import { getAuthors, getSingleAuthor } from '../../api/authorData';
 import { booksOnSale, getBooks } from '../../api/bookData';
+import { showAuthors } from '../components/pages/authors';
 import { showBooks } from '../components/pages/books';
 import signOut from '../helpers/auth/signOut';
 
@@ -14,6 +16,11 @@ const navigationEvents = () => {
     booksOnSale().then((saleBooksArray) => showBooks(saleBooksArray));
   });
 
+  // FVORITE AUTHOR
+  document.querySelector('#fav-author').addEventListener('click', () => {
+    getSingleAuthor().then((favAuthorArray) => showAuthors(favAuthorArray));
+  });
+
   // TODO: ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
     getBooks().then((booksArray) => showBooks(booksArray));
@@ -25,6 +32,7 @@ const navigationEvents = () => {
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
   document.querySelector('#authors').addEventListener('click', () => {
     console.warn('CLICKED AUTHORS');
+    getAuthors().then((authorArray) => showAuthors(authorArray));
   });
 
   // STRETCH: SEARCH
