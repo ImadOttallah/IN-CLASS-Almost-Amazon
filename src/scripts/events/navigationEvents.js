@@ -1,4 +1,4 @@
-import { getAuthors, getSingleAuthor } from '../../api/authorData';
+import { getAuthors, getFavAuthor } from '../../api/authorData';
 import { booksOnSale, getBooks } from '../../api/bookData';
 import { showAuthors } from '../components/pages/authors';
 import { showBooks } from '../components/pages/books';
@@ -16,9 +16,9 @@ const navigationEvents = () => {
     booksOnSale().then((saleBooksArray) => showBooks(saleBooksArray));
   });
 
-  // FVORITE AUTHOR
+  // FAVORITE AUTHOR
   document.querySelector('#fav-author').addEventListener('click', () => {
-    getSingleAuthor().then((favAuthorArray) => showAuthors(favAuthorArray));
+    getFavAuthor().then((favAuthorArray) => showAuthors(favAuthorArray));
   });
 
   // TODO: ALL BOOKS
