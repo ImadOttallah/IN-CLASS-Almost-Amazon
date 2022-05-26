@@ -81,11 +81,36 @@ body {
       margin: 0 auto;
     }
   }
+  #secondView {
+    width: 90%;
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+    margin: auto;
+    justify-content: center;
+
+    .card {
+      width: 300px;
+      margin: 5px;
+
+      .sale-badge {
+        font-size: 1em;
+        background-color: blue;
+      }
+    }
+
+    .table {
+      margin: 10px;
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
 }
 
 #view {
   width: 90%;
   margin: auto;
+  
 
   .details {
     min-width: 50%;
@@ -95,4 +120,9 @@ body {
   .description {
     white-space: pre-wrap;
   }
+}
+
+.fa-heart {
+  color: red;
+  margin: 5px;
 }
