@@ -4,10 +4,10 @@ import renderToDOM from '../../helpers/renderToDom';
 const viewAuthor = (obj) => {
   clearDom();
 
-  const authorString = ` <div class="card" style="width: 18rem;">
+  const authorString = ` <div class="card" style="width: 18rem; background-color: black; color: white;">
   <div class="card-body">
     <h5 class="card-title card-text bold">${obj.favorite ? '<span><i class="fa fa-heart" aria-hidden="true"></i></span>' : ''}${obj.first_name} ${obj.last_name}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">${obj.email}</h6>
+    <h6 class="card-subtitle mb-2">Author Email: <a href="mailto:${obj.email}">${obj.email}</a></h6>
     <hr>
     <i class="fas fa-edit btn btn-info" id="update-author--${obj.firebaseKey}"></i>
     <i class="btn btn-danger fas fa-trash-alt" id="delete-author-btn--${obj.firebaseKey}"></i>
@@ -34,7 +34,7 @@ const viewAuthor = (obj) => {
       </div>`;
   });
 
-  renderToDOM('#secondView', bookString);
+  renderToDOM('#store', bookString);
 };
 
 export default viewAuthor;
