@@ -1,9 +1,9 @@
-import { createAuthor } from '../../api/authorData';
+import { createAuthor, updateAuthor } from '../../api/authorData';
 import { createBook, updateBook } from '../../api/bookData';
 import { showAuthors } from '../components/pages/authors';
 import { showBooks } from '../components/pages/books';
 
-const formEvents = () => {
+const formEvents = (uid) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
     // TODO: CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
@@ -15,6 +15,7 @@ const formEvents = () => {
         description: document.querySelector('#description').value,
         sale: document.querySelector('#sale').checked,
         author_id: document.querySelector('#author_id').value,
+        uid,
       };
       console.warn('CLICKED SUBMIT BOOK', e.target.id);
       createBook(bookObject).then((booksArray) => showBooks(booksArray));
@@ -30,23 +31,37 @@ const formEvents = () => {
         description: document.querySelector('#description').value,
         sale: document.querySelector('#sale').checked,
         author_id: document.querySelector('#author_id').value,
-        firebaseKey
+        firebaseKey,
+        uid
       };
       updateBook(bookObject).then(showBooks);
     }
 
     // FIXME: ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('submit-author')) {
-      console.warn('CLICKED SUBMIT AUTHOR');
       const authorObject = {
-        title: document.querySelector('#first_name').value,
-        image: document.querySelector('#last_name').value,
-        price: document.querySelector('#email').value,
+        first_name: document.querySelector('#first_name').value,
+        last_name: document.querySelector('#last_name').value,
+        email: document.querySelector('#email').value,
+        favorite: document.querySelector('#favorite').checked,
+        uid
       };
-      console.warn('CLICKED SUBMIT BOOK', e.target.id);
+
       createAuthor(authorObject).then((authorArray) => showAuthors(authorArray));
     }
     // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
+    if (e.target.id.includes('update-author')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      const updatedAuthor = {
+        first_name: document.querySelector('#first_name').value,
+        last_name: document.querySelector('#last_name').value,
+        email: document.querySelector('#email').value,
+        favorite: document.querySelector('#favorite').checked,
+        firebaseKey,
+        uid
+      };
+      updateAuthor(updatedAuthor).then((authorArray) => showAuthors(authorArray));
+    }
   });
 };
 
