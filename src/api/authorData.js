@@ -44,11 +44,11 @@ const getFavAuthor = (uid) => new Promise((resolve, reject) => {
     }).catch(reject);
 });
 
-// FIXME: DELETE AUTHOR
-const deleteSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+// FIXME: DELETE AUTHOR remove UID
+const deleteSingleAuthor = (firebaseKey, uid) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/authors/${firebaseKey}.json`)
     .then(() => {
-      getAuthors(firebaseKey.uid).then((authorArray) => resolve(authorArray));
+      getAuthors(uid).then((authorArray) => resolve(authorArray));
     })
     .catch((error) => reject(error));
 });
